@@ -4,7 +4,7 @@
 // @version      0.1
 // @description  Tot up all the prices for the bits and bobs on your Hattons Model Railway wishlist.
 // @author       dnomaid.co.uk
-// @url          https://github.com/mrdnomaid/userscripts/blob/master/hattons.user.js
+// @url          https://github.com/mrdnomaid/userscripts
 // @match        https://www.hattons.co.uk/users/yourwishlist.aspx
 // @license      CC-BY-SA-4.0
 // @grant        none
