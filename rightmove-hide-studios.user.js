@@ -9,14 +9,23 @@
 // @grant        none
 // ==/UserScript==
 
+let TM__RMInterval;
+let TM__RMcurrentURL = window.location.search;
+
 (function() {
     'use strict';
 
     //console.log('the script is running you dummy');
 
+    TM__RMhideStudios();
+})();
+
+function TM__RMhideStudios() {
+    'use strict';
+
     if(document.getElementById('propertySearch-results-container')) {
         const allResults = document.querySelectorAll('.l-searchResult');
-        console.info(`${allResults.length} search results on this page`);
+        //console.info(`${allResults.length} search results on this page`);
         let properties = [];
 
         for(let result of allResults) {
@@ -25,11 +34,11 @@
 
 
         let hidden = 0;
-        window.setTimeout(function() {
+        TM__RMInterval = window.setTimeout(function() {
             hidden = 0;
             for(let property of properties) {
-                let description = document.querySelector(`#${property.id}`).innerText;
-                if(description && description.toLowerCase().includes('studio')) {
+                let description = document.querySelector(`#${property.id}`).innerText.toLowerCase();
+                if(description.includes('studio') || description.includes('single room') || description.includes('share')) {
                     document.querySelector(`#${property.id} .property-hide-button`).click();
                     property.remove();
                     //result.style.filter = 'blur(8px)';
@@ -42,4 +51,18 @@
     } else {
         // console.info('not on search page');
     }
-})();
+}
+
+//window.addEventListener('popstate', function(e) {
+//    clearInterval(TM__RMInterval);
+//    TM__RMhideStudios();
+//});
+
+window.setInterval(function() {
+    if(window.location.search !== TM__RMcurrentURL) {
+        //console.log('url change, running again');
+        clearInterval(TM__RMInterval);
+        window.setTimeout(function(){TM__RMhideStudios()},250);
+        TM__RMcurrentURL = window.location.search;
+    }
+}, 500);
