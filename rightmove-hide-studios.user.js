@@ -9,7 +9,7 @@
 // @grant        none
 // ==/UserScript==
 
-let TM__RMInterval;
+let TM__RMinterval;
 let TM__RMcurrentURL = window.location.search;
 let TM__RMfirstTime = true;
 
@@ -34,7 +34,7 @@ function TM__RMhideStudios() {
         for(let result of allResults) { properties.push(result); }
 
         let hidden = 0;
-        TM__RMInterval = window.setTimeout(function() {
+        TM__RMinterval = window.setTimeout(function() {
             hidden = 0;
             for(let property of properties) {
                 let description = document.querySelector(`#${property.id}`).innerText.toLowerCase();
@@ -63,7 +63,7 @@ function TM__RMhideStudios() {
 window.setInterval(function() {
     if(window.location.search !== TM__RMcurrentURL) {
         //console.log('url change, running again');
-        clearInterval(TM__RMInterval);
+        clearInterval(TM__RMinterval);
         window.setTimeout(function(){
             TM__RMhideStudios();
         }, 200);
