@@ -62,11 +62,18 @@ function TM__RMhideStudios() {
 //    TM__RMhideStudios();
 //});
 
+// todo: onload stuff here
 window.setInterval(function() {
     if(window.location.search !== TM__RMcurrentURL) {
         //console.log('url change, running again');
         clearInterval(TM__RMInterval);
-        window.setTimeout(function(){TM__RMhideStudios()},250);
+        window.setTimeout(function(){
+            TM__RMhideStudios();
+        }, 200);
+        window.setTimeout(function(){
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }, 500);
         TM__RMcurrentURL = window.location.search;
     }
 }, 500);
