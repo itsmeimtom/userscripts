@@ -25,16 +25,13 @@ function TM__RMhideStudios() {
     'use strict';
 
     if(document.getElementById('propertySearch-results-container')) {
-        if(TM__RMfirstTime) { document.querySelector('.searchHeader-title').innerHTML += `<span id="js-search-extra-info"></span>`}
+        if(TM__RMfirstTime) { document.querySelector('.searchHeader-title').innerHTML += `<span id="js-search-extra-info"></span>`; }
 
         const allResults = document.querySelectorAll('.l-searchResult');
         //console.info(`${allResults.length} search results on this page`);
+
         let properties = [];
-
-        for(let result of allResults) {
-            properties.push(result);
-        }
-
+        for(let result of allResults) { properties.push(result); }
 
         let hidden = 0;
         TM__RMInterval = window.setTimeout(function() {
