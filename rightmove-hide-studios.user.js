@@ -12,26 +12,34 @@
 (function() {
     'use strict';
 
-    console.log('the script is running you dummy');
+    //console.log('the script is running you dummy');
 
-    // Your code here...
     if(document.getElementById('propertySearch-results-container')) {
         const allResults = document.querySelectorAll('.l-searchResult');
-        console.info(`${allResults.length} search results on this page`)
-        let hidden = 0;
+        console.info(`${allResults.length} search results on this page`);
+        let properties = [];
 
         for(let result of allResults) {
-            let description = document.querySelector(`#${result.id}`).innerText;
-            if(description && description.toLowerCase().includes('studio')) {
-                result.remove();
-                //result.style.filter = 'blur(8px)';
-                hidden++;
-            }
+            properties.push(result);
         }
 
-        console.info(`hidden ${hidden} of them`);
-        document.querySelector('.searchHeader-title').innerHTML += `(<b>${allResults.length}</b> on this page, <b>${hidden}</b> studios hidden)`;
+
+        let hidden = 0;
+        window.setTimeout(function() {
+            hidden = 0;
+            for(let property of properties) {
+                let description = document.querySelector(`#${property.id}`).innerText;
+                if(description && description.toLowerCase().includes('studio')) {
+                    document.querySelector(`#${property.id} .property-hide-button`).click();
+                    property.remove();
+                    //result.style.filter = 'blur(8px)';
+                    hidden++;
+                }
+            }
+            //console.info(`hidden ${hidden} of them`);
+            document.querySelector('.searchHeader-title').innerHTML += `(<b>${allResults.length}</b> on this page, <b>${hidden}</b> unseen studios hidden)`;
+        }, 1000);
     } else {
-        console.info('not on search page');
+        // console.info('not on search page');
     }
 })();
