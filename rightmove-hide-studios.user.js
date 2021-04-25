@@ -11,6 +11,7 @@
 
 let TM__RMInterval;
 let TM__RMcurrentURL = window.location.search;
+let TM__RMfirstTime = true;
 
 (function() {
     'use strict';
@@ -24,6 +25,8 @@ function TM__RMhideStudios() {
     'use strict';
 
     if(document.getElementById('propertySearch-results-container')) {
+        if(TM__RMfirstTime) { document.querySelector('.searchHeader-title').innerHTML += `<span id="js-search-extra-info"></span>`}
+
         const allResults = document.querySelectorAll('.l-searchResult');
         //console.info(`${allResults.length} search results on this page`);
         let properties = [];
@@ -46,7 +49,8 @@ function TM__RMhideStudios() {
                 }
             }
             //console.info(`hidden ${hidden} of them`);
-            document.querySelector('.searchHeader-title').innerHTML += `(<b>${allResults.length}</b> on this page, <b>${hidden}</b> unseen studios hidden)`;
+            TM__RMfirstTime = false;
+            document.getElementById('js-search-extra-info').innerHTML = `(<b>${allResults.length}</b> on this page, <b>${hidden}</b> unseen studios hidden)`;
         }, 1000);
     } else {
         // console.info('not on search page');
